@@ -46,7 +46,8 @@ apt-get install systemd-timesyncd -y
 # Создаем нового пользователя
 useradd net_admin
 
-# Устанавливаем пароль для пользователя sshuser
+# Устанавливаем пароль для пользователя net_admin
+echo " Напоминание: P@$$word"
 passwd net_admin
 
 # Редактируем файл sudoers, разрешая пользователю выполнять команды без пароля
