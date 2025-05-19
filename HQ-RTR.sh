@@ -143,6 +143,7 @@ no-resolv
 dhcp-range=192.168.2.2,192.168.2.15,999h
 dhcp-option=3,192.168.2.1
 dhcp-option=6,192.168.1.10
+dhcp-option=15,au-team.irpo
 interface=ens19.200
 
 expand-hosts
