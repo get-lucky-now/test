@@ -11,7 +11,7 @@ apt-get install yandex-browser-stable -y
 
 # Создаем нового пользователя
 useradd sshuser
-
+echo " Напоминание: P@ssw0rd"
 # Устанавливаем пароль для пользователя sshuser
 passwd sshuser
 
