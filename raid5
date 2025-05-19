@@ -46,6 +46,6 @@ systemctl enable --now nfs
 systemctl restart nfs
 
 cat <<EOF
-Зайди в /etc/fstab на hq-srv и cli а после выполни systemctl restart nfs
+Зайди в /etc/fstab на hq-srv и cli а после выполни systemctl restart nfs, затем на HQ-SRV ls /raid5/nfs
 EOF
 
