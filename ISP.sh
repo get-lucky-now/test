@@ -76,14 +76,14 @@ EOF
 systemctl enable --now sshd.service
 systemctl restart sshd.service
 
-systemctl disable --now chronyd
+#systemctl disable --now chronyd
 
-sed -i 's|^#NTP=.*|NTP=172.16.4.2|' /etc/systemd/timesyncd.conf
+#sed -i 's|^#NTP=.*|NTP=172.16.4.2|' /etc/systemd/timesyncd.conf
 
-systemctl enable --now systemd-timesyncd
-systemctl restart systemd-timesyncd
-timedatectl set-timezone Asia/Krasnoyarsk
-systemctl restart systemd-timesyncd
+#systemctl enable --now systemd-timesyncd
+#systemctl restart systemd-timesyncd
+#timedatectl set-timezone Asia/Krasnoyarsk
+#systemctl restart systemd-timesyncd
 
 # Перезагружаем машину
 reboot
