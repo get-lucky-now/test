@@ -4,7 +4,7 @@
 hostnamectl set-hostname hq-cli.au-team.irpo
 
 apt-get update
-apt-get install openssh-server systemd-timesyncd -y
+apt-get install openssh-server systemd-timesyncd python-module-json -y
 
 # Создаем нового пользователя
 useradd sshuser
