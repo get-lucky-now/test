@@ -123,14 +123,18 @@ log file /var/log/frr/frr.log
 no ipv6 forwarding
 !
 router ospf
- router-id 2.2.2.2
+ router-id 1.1.1.1
  network 10.0.0.0/30 area 0
- network 172.16.4.0/28 area 0
- network 172.16.5.0/28 area 0
- network 192.168.1.0/26 area 0
- network 192.168.2.0/28 area 0
- network 192.168.99.0/29 area 0
+ passive-interface ens18
+ passive-interface ens19
+ passive-interface ens19.100
+ passive-interface ens19.200
+ passive-interface ens19.999
 exit
+!
+interface iptunnel
+ ip ospf authentication message-digest
+ ip ospf message-digest-key 1 md5 P@ssw0rd
 !
 EOF
 
