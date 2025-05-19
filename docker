@@ -64,3 +64,19 @@ complete the installation
 
 scp -P 2024 /home/user/Загрузки/LocalSettings.php sshuser@192.168.3.10:/home/sshuser/
 EOF
+
+read -p "Нажми Enter, чтобы продолжить..."
+
+cat <<EOF
+После на BR-SRV
+
+rm -rf /root/LocalSettings.php
+mkdir /root/mediawiki
+mv /home/sshuser/LocalSettings.php /root/mediawiki/
+
+Раскомментируем строку volumes в файле wiki.yml 
+
+docker compose -f wiki.yml up -d
+
+Проверяем на HQ-Cli работу сайта
+EOF
