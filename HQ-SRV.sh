@@ -45,6 +45,8 @@ echo 'NTP=192.168.1.1' >> /etc/systemd/timesyncd.conf
 
 systemctl enable --now systemd-timesyncd
 systemctl restart systemd-timesyncd
+timedatectl set-timezone Asia/Krasnoyarsk
+systemctl restart systemd-timesyncd
 
 cat <<EOF > /etc/dnsmasq.conf
 domain=au-team.irpo
