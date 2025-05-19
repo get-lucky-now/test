@@ -8,6 +8,7 @@ apt-get install openssh-server -y
 apt-get install systemd-timesyncd -y
 apt-get install python-module-json -y
 apt-get install yandex-browser-stable -y
+apt-get install nfs-clients -y
 
 # Создаем нового пользователя
 useradd sshuser -u 1010
@@ -48,5 +49,24 @@ systemctl enable --now systemd-timesyncd
 systemctl restart systemd-timesyncd
 timedatectl set-timezone Asia/Krasnoyarsk
 systemctl restart systemd-timesyncd
+
+# Создаем точку монтирования
+echo "Создаем точку монтирования..."
+mkdir -p /mnt/nfs
+
+# Пробуем смонтировать раздел
+echo "Монтируем раздел..."
+mount -a && mount -v || { echo 'Ошибка монтирования!'; exit 1; }
+
+# Тестовая запись файла
+echo "Тестовая запись файла..."
+touch /mnt/nfs/ruby || { echo 'Ошибка записи файла!'; exit 1; }
+
+# Редактируем /etc/fstab для автоматического монтирования
+echo "Настраиваем автоматическое монтирование..."
+cat <<EOF | tee -a /etc/fstab >&2
+192.168.1.10:/raid5/nfs  /mnt/nfs  nfs  defaults  0  0
+EOF
+
 timedatectl timesync-status
 exec bash
