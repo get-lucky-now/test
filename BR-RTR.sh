@@ -118,9 +118,14 @@ systemctl disable --now chronyd
 
 sed -i 's|^#NTP=.*|NTP=172.16.4.2|' /etc/systemd/timesyncd.conf
 
+iptables -t nat -A PREROUTING -p tcp -d 192.168.3.1 --dport 80 -j DNAT --to-destination 192.168.3.10:8080
+iptables -t nat -A PREROUTING -p tcp -d 192.168.3.1 --dport 2024 -j DNAT --to-destination 192.168.3.10:2024
+iptables-save > /etc/sysconfig/iptables
+
 systemctl enable --now systemd-timesyncd
 systemctl restart systemd-timesyncd
 timedatectl set-timezone Asia/Krasnoyarsk
 systemctl restart systemd-timesyncd
 timedatectl timesync-status
+
 exec bash
