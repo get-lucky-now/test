@@ -56,6 +56,7 @@ apt-get install frr openssh-server systemd-timesyncd rsyslog-classic -y
 useradd net_admin
 
 # Устанавливаем пароль для пользователя net_admin
+echo " Напоминание: P@$$word"
 passwd net_admin
 
 # Редактируем файл sudoers, разрешая пользователю выполнять команды без пароля
