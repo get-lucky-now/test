@@ -1,0 +1,31 @@
+#!/bin/bash
+
+apt-get update
+apt-get install ansible -y
+mkdir -p /etc/ansible
+
+cat <<EOF > /etc/ansible/hosts
+hq-srv ansible_host=sshuser@192.168.1.10 ansible_port=2024
+hq-cli ansible_host=sshuser@192.168.2.7 ansible_port=2024
+hq-rtr ansible_host=net_admin@192.168.1.1 ansible_port=2024
+br-rtr ansible_host=net_admin@192.168.3.1 ansible_port=2024
+EOF
+
+CONFIG_FILE="/etc/ansible/ansible.cfg"
+LINE_TO_INSERT="ansible_python_interpreter=/usr/bin/python3"
+
+# Вставка строки после [defaults], если она ещё не добавлена
+if ! grep -qF "$LINE_TO_INSERT" "$CONFIG_FILE"; then
+    sed -i '/^\[defaults\]/a '"$LINE_TO_INSERT" "$CONFIG_FILE"
+    echo "Строка добавлена в $CONFIG_FILE"
+else
+    echo "Строка уже присутствует в $CONFIG_FILE"
+fi
+
+ssh-keygen -t rsa
+ssh-copy-id -p 2024 net_admin@192.168.3.1
+ssh-copy-id -p 2024 sshuser@192.168.2.7
+ssh-copy-id -p 2024 sshuser@192.168.1.10
+ssh-copy-id -p 2024 net_admin@192.168.1.1
+
+ansible all -m ping
