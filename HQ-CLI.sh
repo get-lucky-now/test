@@ -46,5 +46,7 @@ echo 'NTP=192.168.2.1' >> /etc/systemd/timesyncd.conf
 
 systemctl enable --now systemd-timesyncd
 systemctl restart systemd-timesyncd
+timedatectl set-timezone Asia/Krasnoyarsk
+systemctl restart systemd-timesyncd
 timedatectl timesync-status
 exec bash
