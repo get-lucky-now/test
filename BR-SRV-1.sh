@@ -4,7 +4,12 @@
 hostnamectl set-hostname br-srv.au-team.irpo
 
 apt-get update
-apt-get install openssh-server systemd-timesyncd samba task-samba-dc docker-engine docker-compose rsyslog-classic -y
+apt-get install openssh-server -y
+apt-get install systemd-timesyncd -y
+apt-get install samba -y
+apt-get install task-samba-dc -y
+apt-get install docker-engine docker-compose -y
+apt-get install rsyslog-classic -y
 
 # Создаем нового пользователя
 useradd sshuser -u 1010
