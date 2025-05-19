@@ -10,7 +10,7 @@ apt-get install python-module-json -y
 apt-get install yandex-browser-stable -y
 
 # Создаем нового пользователя
-useradd sshuser
+useradd sshuser -u 1010
 echo " Напоминание: P@ssw0rd"
 # Устанавливаем пароль для пользователя sshuser
 passwd sshuser
