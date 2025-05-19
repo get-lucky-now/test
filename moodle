@@ -1,0 +1,92 @@
+#!/bin/bash
+
+apt-get update
+apt-get install apache2 php8.2 apache2-mod_php8.2 mariadb-server php8.2-opcache php8.2-curl php8.2-gd php8.2-intl php8.2-mysqli php8.2-xml php8.2-xmlrpc php8.2-ldap php8.2-zip php8.2-soap php8.2-mbstring php8.2-json php8.2-xmlreader php8.2-fileinfo php8.2-sodium -y
+
+systemctl enable --now httpd2 mysqld
+
+cat <<EOF
+Enter
+Y
+Y
+P@ssw0rd
+Y
+Y
+Y
+Y
+EOF
+
+# Безопасная настройка MySQL
+mysql_secure_installation
+
+cat <<EOF
+CREATE DATABASE moodledb;
+CREATE USER moodle IDENTIFIED BY ‘P@ssw0rd’;
+GRANT ALL PRIVILEGES ON moodledb.* TO moodle;
+FLUSH PRIVILEGES;
+exit
+EOF
+
+# Вход в базу данных MySQL
+mariadb -u root -p
+
+curl -L https://github.com/moodle/moodle/archive/refs/tags/v4.5.0.zip > /root/moodle.zip
+
+unzip /root/moodle.zip -d /var/www/html
+mkdir -p /var/www/html/
+mv /var/www/html/moodle-4.5.0/* /var/www/html/
+ls /var/www/html
+read -p "Нажми Enter, чтобы продолжить..."
+
+mkdir /var/www/moodledata
+chown apache2:apache2 /var/www/html
+chown apache2:apache2 /var/www/moodledata
+
+# Оптимизация настроек PHP
+sed -i 's/max_input_vars = .*/max_input_vars = 5000/' /etc/php/8.2/apache2-mod_php/php.ini
+
+rm /var/www/html/index.html
+systemctl restart httpd2
+
+cat <<EOF
+На HQ-CLI http://192.168.1.10/install.php
+
+Выбираем MariaDB (<<родной>>/mariadb) в качестве драйвера базы данных
+
+Название базы данных:		moodledb
+Пользователь базы данных:	moodle
+Пароль:				P@ssw0rd
+
+Продолжить
+
+Просматриваем всё ли в статус “OK” или “Проверка” и прожимаем Продолжить
+
+Дальше пойдёт процесс установки в виде окна "Установка" "Система", процесс этот может быть долгим
+
+После установки видим, что всё прошло успешно и жмём “Продолжить”
+
+Далее заполняем обязательные поля для создания основного администратора
+Логин:			admin
+Новый пароль:		P@ssw0rd
+Имя:			Администратор (можно любое)
+Фамилия:		Пользователь (можно любое)
+Адрес электронной почты:test.test@mail.ru (можно любое)
+
+И нажимаем “Обновить профиль”
+
+Теперь заполним ещё некоторые строки на следующем шаге
+Полное название сайта:		moodle (можно любое)
+Краткое название сайта:		5 (согласно вашему рабочему месту)
+Настройки местоположения:	Азия/Красноярск
+Контакты службы поддержки:	test.test@mail.ru
+
+И жмём “Сохранить изменения” в конце страницы:
+И после всего нас встречает рабочий сайт moodle, смотрим, что все наши указанные параметры отображаются
+EOF
+
+
+
+
+
+
+
