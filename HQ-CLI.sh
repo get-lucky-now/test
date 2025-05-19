@@ -54,19 +54,18 @@ systemctl restart systemd-timesyncd
 echo "Создаем точку монтирования..."
 mkdir -p /mnt/nfs
 
+# Редактируем /etc/fstab для автоматического монтирования
+echo '192.168.1.10:/raid5/nfs  /mnt/nfs  nfs  defaults  0  0' >> /etc/fstab
+mkdir /raid5
+
 # Пробуем смонтировать раздел
 echo "Монтируем раздел..."
-mount -a && mount -v || { echo 'Ошибка монтирования!'; exit 1; }
+mount -a
+mount -v
 
 # Тестовая запись файла
 echo "Тестовая запись файла..."
 touch /mnt/nfs/ruby || { echo 'Ошибка записи файла!'; exit 1; }
-
-# Редактируем /etc/fstab для автоматического монтирования
-echo "Настраиваем автоматическое монтирование..."
-cat <<EOF | tee -a /etc/fstab >&2
-192.168.1.10:/raid5/nfs  /mnt/nfs  nfs  defaults  0  0
-EOF
 
 timedatectl timesync-status
 exec bash
