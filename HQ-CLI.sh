@@ -56,7 +56,6 @@ mkdir -p /mnt/nfs
 
 # Редактируем /etc/fstab для автоматического монтирования
 echo '192.168.1.10:/raid5/nfs  /mnt/nfs  nfs  defaults  0  0' >> /etc/fstab
-mkdir /raid5
 
 # Пробуем смонтировать раздел
 echo "Монтируем раздел..."
