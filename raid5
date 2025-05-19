@@ -44,4 +44,8 @@ exportfs -v
 # Перезапуск NFS
 systemctl enable --now nfs
 systemctl restart nfs
-#echo "Выполни ..."
+
+cat <<EOF
+Зайди в /etc/fstab на hq-srv и cli а после выполни systemctl restart nfs
+EOF
+
