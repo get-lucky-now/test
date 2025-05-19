@@ -12,5 +12,5 @@ cat <<EOF
 (9) BR-SRV-3.sh
 (10) ansible
 (11) docker
-
+(12) moodle
 EOF
