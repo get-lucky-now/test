@@ -35,7 +35,7 @@ sudo id root
 EOF
 
 echo "Возвращаемся на BR-SRV"
-echo "Проверь есть ли Users.csv в "/opt", если есть то выполняй import.sh"
+echo "Проверь есть ли Users.csv в "/opt", если есть то выполняй import"
 read -p "Нажми Enter, чтобы продолжить..."
 
 # распаковка юзеров
