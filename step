@@ -10,7 +10,7 @@ cat <<EOF
 (7) BR-SRV-1.sh
 (8) BR-SRV-2.sh
 (9) BR-SRV-3.sh
-(10) ansible
-(11) docker
-(12) moodle
+(10) ansible (BR-SRV)
+(11) docker (BR-SRV)
+(12) moodle (HQ-SRV)
 EOF
