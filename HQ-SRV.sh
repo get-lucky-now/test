@@ -49,6 +49,7 @@ server=8.8.8.8
 server=/au-team.irpo/192.168.3.10
 interface=ens18
 
+# --- A и PTR ---
 address=/hq-rtr.au-team.irpo/192.168.1.1
 ptr-record=1.1.168.192.in-addr.arpa,hq-rtr.au-team.irpo
 
@@ -58,19 +59,11 @@ ptr-record=10.1.168.192.in-addr.arpa,hq-srv.au-team.irpo
 address=/hq-cli.au-team.irpo/192.168.2.10
 ptr-record=10.2.168.192.in-addr.arpa,hq-cli.au-team.irpo
 
+# --- Только A ---
 address=/br-rtr.au-team.irpo/192.168.3.1
-ptr-record=1.3.168.192.in-addr.arpa,br-rtr.au-team.irpo
-
 address=/br-srv.au-team.irpo/192.168.3.10
-ptr-record=10.3.168.192.in-addr.arpa,br-srv.au-team.irpo
-
-# HQ-RTR side (ens19 - 172.16.4.1)
 address=/moodle.au-team.irpo/172.16.4.1
-ptr-record=1.4.16.172.in-addr.arpa,moodle.au-team.irpo
-
-# BR-RTR side (ens20 - 172.16.5.1)
 address=/wiki.au-team.irpo/172.16.5.1
-ptr-record=1.5.16.172.in-addr.arpa,wiki.au-team.irpo
 EOF
 
 systemctl enable --now dnsmasq
