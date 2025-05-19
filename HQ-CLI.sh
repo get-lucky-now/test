@@ -4,7 +4,10 @@
 hostnamectl set-hostname hq-cli.au-team.irpo
 
 apt-get update
-apt-get install openssh-server systemd-timesyncd python-module-json yandex-browser-stable -y
+apt-get install openssh-server -y
+apt-get install systemd-timesyncd -y
+apt-get install python-module-json -y
+apt-get install yandex-browser-stable -y
 
 # Создаем нового пользователя
 useradd sshuser
