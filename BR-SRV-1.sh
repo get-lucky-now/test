@@ -55,6 +55,8 @@ wget https://raw.githubusercontent.com/get-lucky-now/script/main/BR-SRV-2.sh
 chmod +x BR-SRV-2.sh
 wget https://raw.githubusercontent.com/get-lucky-now/script/main/BR-SRV-3.sh
 chmod +x BR-SRV-3.sh
+wget https://raw.githubusercontent.com/get-lucky-now/script/main/import.sh
+chmod +x import.sh
 
 #обновляем пакеты
 apt-get update
