@@ -39,7 +39,6 @@ service network restart
 systemctl enable iptables
 systemctl start iptables
 
-apt-get install frr -y
 apt-get install openssh-server -y
 apt-get install systemd-timesyncd -y
 
@@ -73,29 +72,6 @@ EOF
 # Перезапускаем сервис SSHD
 systemctl enable --now sshd.service
 systemctl restart sshd.service
-
-# Включаем OSPF
-sed -i 's/^ospfd=no/ospfd=yes/' /etc/frr/daemons
-
-systemctl restart frr
-
-cat <<EOF > /etc/frr/frr.conf
-frr version 9.0.2
-frr defaults traditional
-hostname isp.au-team.irpo
-log file /var/log/frr/frr.log
-no ipv6 forwarding
-!
-router ospf
- router-id 1.1.1.1
- network 172.16.4.0/28 area 0
- network 172.16.5.0/28 area 0
-exit
-!
-EOF
-
-systemctl enable --now frr
-systemctl restart frr
 
 systemctl disable --now chronyd
 
