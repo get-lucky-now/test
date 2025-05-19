@@ -23,15 +23,6 @@ echo '172.16.4.1/28' > /etc/net/ifaces/ens19/ipv4address
 echo '172.16.5.1/28' > /etc/net/ifaces/ens20/ipv4address
 
 # Включаем форвардинг пакетов
-#cat <<EOF > /etc/net/sysctl.conf
-#net.ipv4.ip_forward = 1
-#net.ipv4.conf.default.rp_filter = 1
-#net.ipv4.icmp_echo_ignore_broadcasts = 1
-#net.ipv4.tcp_syncookies = 1
-#net.ipv4.tcp_timestamps = 0
-#EOF
-
-# Включаем форвардинг пакетов
 sed -i 's/net.ipv4.ip_forward.*/net.ipv4.ip_forward = 1/' /etc/net/sysctl.conf
 
 sysctl -p
@@ -60,11 +51,11 @@ passwd net_admin
 echo 'net_admin ALL=(ALL:ALL) NOPASSWD: ALL' >> /etc/sudoers
 
 cat <<EOF > /tmp/sshd_new_top
-Port 2024
-PermitRootLogin no
-AllowUsers net_admin
-MaxAuthTries 2
-Banner /etc/openssh/banner
+#Port 2024
+#PermitRootLogin no
+#AllowUsers net_admin
+#MaxAuthTries 2
+#Banner /etc/openssh/banner
 EOF
 
 cat /etc/openssh/sshd_config >> /tmp/sshd_new_top
@@ -85,17 +76,6 @@ sed -i 's/^ospfd=no/ospfd=yes/' /etc/frr/daemons
 
 systemctl restart frr
 
-#vtysh <<EOF
-#conf t
-#router ospf
-#network 172.16.4.0/28 area 0
-#network 172.16.5.0/28 area 0
-#do wr mem
-#exit
-#exit
-#exit
-#EOF
-
 cat <<EOF > /etc/frr/frr.conf
 frr version 9.0.2
 frr defaults traditional
@@ -115,10 +95,6 @@ systemctl enable --now frr
 systemctl restart frr
 
 systemctl disable --now chronyd
-
-#cat <<EOF >> /etc/systemd/timesyncd.conf
-#NTP=172.16.4.2
-#EOF
 
 echo 'NTP=172.16.4.2' >> /etc/systemd/timesyncd.conf
 
