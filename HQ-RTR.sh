@@ -84,6 +84,9 @@ apt-get install rsyslog-classic -y
 useradd net_admin
 
 # Устанавливаем пароль для пользователя net_admin
+cat <<EOF
+ Напоминание: P@$$word
+EOF
 echo " Напоминание: P@$$word"
 passwd net_admin
 
