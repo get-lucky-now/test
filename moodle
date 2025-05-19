@@ -49,6 +49,7 @@ rm /var/www/html/index.html
 systemctl restart httpd2
 
 cat <<EOF
+Расскоментируй max_input_vars = 5000/ в /etc/php/8.2/apache2-mod_php/php.ini
 На HQ-CLI http://192.168.1.10/install.php
 
 Выбираем MariaDB (<<родной>>/mariadb) в качестве драйвера базы данных
