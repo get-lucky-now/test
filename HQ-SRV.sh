@@ -12,6 +12,7 @@ apt-get install tree -y
 # Создаем нового пользователя
 useradd sshuser -u 1010
 id sshuser
+echo " Напоминание: P@ssw0rd"
 passwd sshuser
 
 # Редактируем файл sudoers, разрешая пользователю выполнять команды без пароля
