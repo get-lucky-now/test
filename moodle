@@ -43,7 +43,7 @@ chown apache2:apache2 /var/www/html
 chown apache2:apache2 /var/www/moodledata
 
 # Оптимизация настроек PHP
-sed -i 's/max_input_vars = .*/max_input_vars = 5000/' /etc/php/8.2/apache2-mod_php/php.ini
+sed -i 's/max_input_vars = .*/max_input_vars = 5000/' /etc/php/8.2/apache2-mod_php/php.ini, после systemctl restart httpd2
 
 rm /var/www/html/index.html
 systemctl restart httpd2
