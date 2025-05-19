@@ -33,7 +33,7 @@ chown 99:99 /raid5/nfs
 chmod 777 /raid5/nfs
 
 # Настройка экспорта NFS
-cat <<EOF > /etc/exports
+cat <<EOF >> /etc/exports
 /raid5/nfs 192.168.2.0/28(rw,sync,no_subtree_check)
 EOF
 
