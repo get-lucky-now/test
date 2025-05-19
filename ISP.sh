@@ -39,7 +39,9 @@ service network restart
 systemctl enable iptables
 systemctl start iptables
 
-apt-get install frr openssh-server systemd-timesyncd -y
+apt-get install frr -y
+apt-get install openssh-server -y
+apt-get install systemd-timesyncd -y
 
 # Создаем нового пользователя
 useradd net_admin
