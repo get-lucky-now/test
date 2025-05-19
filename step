@@ -1,0 +1,16 @@
+#!/bin/bash
+
+cat <<EOF
+(1) ISP.sh
+(2) HQ-RTR.sh
+(3) BR-RTR.sh
+(4) HQ-SRV.sh
+(5) raid5
+(6) HQ-CLI.sh
+(7) BR-SRV-1.sh
+(8) BR-SRV-2.sh
+(9) BR-SRV-3.sh
+(10) ansible
+(11) 
+
+EOF
