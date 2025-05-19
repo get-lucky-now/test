@@ -34,9 +34,6 @@ sudo cat /etc/passwd | sudo grep root
 sudo id root
 EOF
 
-wget https://raw.githubusercontent.com/get-lucky-now/script/main/import.sh
-chmod +x import.sh
-
 echo "Возвращаемся на BR-SRV"
 echo "Проверь есть ли Users.csv в "/opt", если есть то выполняй import.sh"
 read -p "Нажми Enter, чтобы продолжить..."
