@@ -164,7 +164,7 @@ systemctl restart dnsmasq.service
 
 # Настраеваем сервер chrony
 cat <<EOF > /etc/chrony.conf
-local stratum 7
+local stratum 5
 allow 192.168.1.0/26
 allow 192.168.2.0/28
 allow 172.16.4.0/28
