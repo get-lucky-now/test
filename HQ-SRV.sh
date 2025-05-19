@@ -7,9 +7,8 @@ apt-get update
 apt-get install openssh-server systemd-timesyncd dnsmasq tree -y
 
 # Создаем нового пользователя
-useradd sshuser
-
-# Устанавливаем пароль для пользователя sshuser
+useradd sshuser -u 1010
+id sshuser
 passwd sshuser
 
 # Редактируем файл sudoers, разрешая пользователю выполнять команды без пароля
