@@ -66,6 +66,7 @@ cat <<EOF > /etc/resolv.conf
 #domain ak.local
 #nameserver 8.8.8.8
 nameserver 127.0.0.1
+nameserver 192.168.1.10
 EOF
 
 # Очищаем старую конфигурацию Samba
