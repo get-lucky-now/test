@@ -4,7 +4,10 @@
 hostnamectl set-hostname hq-srv.au-team.irpo
 
 apt-get update
-apt-get install openssh-server systemd-timesyncd dnsmasq tree -y
+apt-get install openssh-server -y
+apt-get install systemd-timesyncd -y
+apt-get install dnsmasq -y
+apt-get install tree -y
 
 # Создаем нового пользователя
 useradd sshuser -u 1010
