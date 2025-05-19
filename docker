@@ -1,3 +1,66 @@
 #!/bin/bash
 
-  
+apt-get install docker-ce docker-engine docker-compose-v2 -y
+systemctl enable --now docker
+systemctl start docker
+
+# Скачиваем образы MediaWiki и MariaDB
+docker pull mediawiki
+docker pull mariadb
+
+# Конфигурация контейнера MediaWiki и базы данных
+cat <<EOF > /root/wiki.yml
+services:
+  mariadb:
+    image: mariadb
+    container_name: mariadb
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: P@ssw0rd
+      MYSQL_DATABASE: mediawiki
+      MYSQL_USER: wiki
+      MYSQL_PASSWORD: P@ssw0rd
+    volumes: [ mariadb_data:/var/lib/mysql ]
+  wiki:
+    image: mediawiki
+    container_name: wiki
+    restart: always
+    environment:
+      MEDIAWIKI_DB_HOST: mariadb
+      MEDIAWIKI_DB_USER: wiki
+      MEDIAWIKI_DB_PASSWORD: P@ssw0rd
+      MEDIAWIKI_DB_NAME: mediawiki
+    ports:
+      - "8080:80"
+    #volumes: [ /root/mediawiki/LocalSettings.php:/var/www/html/LocalSettings.php ]
+volumes:
+  mariadb_data:
+EOF
+
+# Запускаем контейнеры
+docker compose -f /root/wiki.yml up -d
+
+cat <<EOF
+На HQ-CLI
+
+В браузере 192.168.3.10:8080
+complete the installation 
+
+Настройки MariaDB/MySQL
+Хост базы данных: mariadb
+Имя базы данных: mediawiki
+Имя пользователя базы данных: wiki
+Пароль базы данных: P@ssw0rd
+
+Использовать ту же учетную запись что и для установки
+
+Название вики: ruby
+Ваше имя участника: wiki
+Пароль: WikiP@ssw0rd
+
+Хватит уже, просто установите вики
+
+Далее автоматически скачивается файл LocalSettings.php, который нужно переместить теперь на сервер с mediawiki, а именно на BR-SRV c HQ-CLI
+
+scp -P 2024 /home/user/Загрузки/LocalSettings.php sshuser@192.168.3.10:/home/sshuser/
+EOF
