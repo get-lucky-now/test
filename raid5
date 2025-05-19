@@ -1,0 +1,47 @@
+#!/bin/bash
+
+# Проверка дисков
+lsblk
+read -p "Нажми Enter, чтобы продолжить..."
+
+# Создание RAID5 массива
+mdadm --create /dev/md0 --level=5 --raid-devices=3 /dev/sd[b-d]
+
+# Просмотр состояния RAID массива
+cat /proc/mdstat
+
+# Сохранение информации о массиве
+mdadm --detail -scan > /etc/mdadm.conf
+
+# Форматирование раздела
+fdisk /dev/md0 <<< "$(printf '%s\n' n p 1 2048 4186111 w)"
+
+# Создание файловой системы
+mkfs.ext4 /dev/md0p1
+
+# Монтируем созданный раздел
+echo '/dev/md0p1 /raid5 ext4 defaults 0 0' > /etc/fstab
+mkdir /raid5
+mount -a
+
+# Установка NFS сервера
+apt-get install nfs-server -y
+
+# Подготовка каталога для экспорта
+mkdir /raid5/nfs
+chown 99:99 /raid5/nfs
+chmod 777 /raid5/nfs
+
+# Настройка экспорта NFS
+cat <<EOF > /etc/exports
+/raid5/nfs 192.168.2.0/28(rw,sync,no_subtree_check)
+EOF
+
+# Экспорт ресурсов NFS
+exportfs -a
+exportfs -v
+
+# Перезапуск NFS
+systemctl enable --now nfs
+systemctl restart nfs
+#echo "Выполни ..."
