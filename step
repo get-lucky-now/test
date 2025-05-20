@@ -13,5 +13,5 @@ cat <<EOF
 (10) ansible (BR-SRV)
 (11) docker (BR-SRV)
 (12) moodle (HQ-SRV)
-(13) nginx (ISP)
+(*) nginx (ISP)
 EOF
