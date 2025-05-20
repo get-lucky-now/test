@@ -106,7 +106,7 @@ router ospf
 exit
 !
 interface iptunnel
- io ospf area 0
+ ip ospf area 0
  ip ospf authentication message-digest
  ip ospf message-digest-key 1 md5 P@ssw0rd
 !
