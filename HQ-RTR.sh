@@ -192,9 +192,12 @@ echo 'nameserver 77.88.8.8' >> /etc/resolv.conf
 echo 'nameserver 8.8.8.8' >> /etc/resolv.conf
 
 # Настройка NAT перенаправления порта TCP 2024 на внутренний сервер
-echo "Настраиваем NAT..."
-iptables -t nat -A PREROUTING -p tcp -d 192.168.1.1 --dport 2024 -j DNAT --to-destination 192.168.1.10:2024
-iptables-save > /etc/sysconfig/iptables
+#echo "Настраиваем NAT..."
+#iptables -t nat -A PREROUTING -p tcp -d 192.168.1.1 --dport 2024 -j DNAT --to-destination 192.168.1.10:2024
+#iptables-save > /etc/sysconfig/iptables
+
+wget https://raw.githubusercontent.com/get-lucky-now/script/main/rc.local.hq
+chmod +x rc.local.hq
 
 exec bash
 #reboot
