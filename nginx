@@ -1,0 +1,34 @@
+#!/bin/bash
+
+echo "поменяй на HQ-SRV в /var/www/html/config.php значение на $CFG->wwwroot	= ‘http://moodle.au-team.irpo’; "
+read -p "Нажми Enter, чтобы продолжить..."
+apt-get install nginx
+
+cat <<EOF > /etc/nginx/sites-available/proxy
+server {
+	listen 80;
+	server_name moodle.au-team.irpo;
+	location / {
+		proxy_pass http://192.168.1.10:80;
+		proxy_set_header Host $host;
+             	proxy_set_header X-Real-IP  $remote_addr;
+            	proxy_set_header X-Forwarded-For $remote_addr;
+     	}
+}
+server {
+	listen 80;
+	server_name wiki.au-team.irpo;
+	location / {
+		proxy_pass http://192.168.3.10:8080;
+		proxy_set_header Host $host;
+             	proxy_set_header X-Real-IP  $remote_addr;
+             	proxy_set_header X-Forwarded-For $remote_addr;
+     	}
+}
+EOF
+
+rm -rf /etc/nginx/sites-available/default
+rm -rf /etc/nginx/sites-enabled/default
+ln -s /etc/nginx/sites-available/proxy /etc/nginx/sites-enabled
+ls -la /etc/nginx/sites-enabled
+systemctl restart nginx
