@@ -106,6 +106,7 @@ router ospf
 exit
 !
 interface iptunnel
+ io ospf area 0
  ip ospf authentication message-digest
  ip ospf message-digest-key 1 md5 P@ssw0rd
 !
@@ -121,6 +122,9 @@ sed -i 's|^#NTP=.*|NTP=172.16.4.2|' /etc/systemd/timesyncd.conf
 iptables -t nat -A PREROUTING -p tcp -d 192.168.3.1 --dport 80 -j DNAT --to-destination 192.168.3.10:8080
 iptables -t nat -A PREROUTING -p tcp -d 192.168.3.1 --dport 2024 -j DNAT --to-destination 192.168.3.10:2024
 iptables-save > /etc/sysconfig/iptables
+
+wget https://raw.githubusercontent.com/get-lucky-now/script/main/rc.local.br
+chmod +x rc.local.br
 
 systemctl enable --now systemd-timesyncd
 systemctl restart systemd-timesyncd
