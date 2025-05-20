@@ -196,7 +196,7 @@ echo 'nameserver 8.8.8.8' >> /etc/resolv.conf
 #iptables -t nat -A PREROUTING -p tcp -d 192.168.1.1 --dport 2024 -j DNAT --to-destination 192.168.1.10:2024
 #iptables-save > /etc/sysconfig/iptables
 
-wget https://raw.githubusercontent.com/get-lucky-now/script/main/rc.local.hq
+wget https://raw.githubusercontent.com/get-lucky-now/test/main/rc.local.hq
 chmod +x rc.local.hq
 
 exec bash
