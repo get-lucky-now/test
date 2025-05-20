@@ -51,11 +51,11 @@ systemctl restart systemd-timesyncd
 timedatectl set-timezone Asia/Krasnoyarsk
 systemctl restart systemd-timesyncd
 
-wget https://raw.githubusercontent.com/get-lucky-now/script/main/BR-SRV-2.sh
+wget https://raw.githubusercontent.com/get-lucky-now/test/main/BR-SRV-2.sh
 chmod +x BR-SRV-2.sh
-wget https://raw.githubusercontent.com/get-lucky-now/script/main/BR-SRV-3.sh
+wget https://raw.githubusercontent.com/get-lucky-now/test/main/BR-SRV-3.sh
 chmod +x BR-SRV-3.sh
-wget https://raw.githubusercontent.com/get-lucky-now/script/main/import
+wget https://raw.githubusercontent.com/get-lucky-now/test/main/import
 chmod +x import
 
 #обновляем пакеты
