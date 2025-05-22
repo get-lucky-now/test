@@ -1,0 +1,59 @@
+-------------ISP---------------
+apt-get install wget
+wget https://raw.githubusercontent.com/get-lucky-now/test/main/ISP.sh
+chmod +x ISP.sh
+./ISP.sh
+
+-------------HQ-RTR---------------
+apt-get install wget
+wget https://raw.githubusercontent.com/get-lucky-now/test/main/HQ-RTR.sh
+chmod +x HQ-RTR.sh
+./HQ-RTR.sh
+
+-------------BR-RTR---------------
+apt-get install wget
+wget https://raw.githubusercontent.com/get-lucky-now/test/main/BR-RTR.sh
+chmod +x BR-RTR.sh
+./BR-RTR.sh
+
+-------------HQ-SRV---------------
+apt-get install wget
+wget https://raw.githubusercontent.com/get-lucky-now/test/main/HQ-SRV.sh
+chmod +x HQ-SRV.sh
+./HQ-SRV.sh
+
+-------------HQ-SRV-raid5---------------
+apt-get install wget
+wget https://raw.githubusercontent.com/get-lucky-now/test/main/raid5.sh
+chmod +x raid5.sh
+./HQ-SRV.sh
+
+-------------HQ-CLI---------------
+apt-get install wget
+wget https://raw.githubusercontent.com/get-lucky-now/test/main/HQ-CLI.sh
+chmod +x HQ-CLI.sh
+./HQ-CLI.sh
+
+-------------BR-SRV---------------
+apt-get install wget
+wget https://raw.githubusercontent.com/get-lucky-now/test/main/BR-SRV-1.sh
+chmod +x BR-SRV-1.sh
+./BR-SRV-1.sh
+
+-------------BR-SRV-ansible---------------
+apt-get install wget
+wget https://raw.githubusercontent.com/get-lucky-now/test/main/ansible.sh
+chmod +x ansible.sh
+./BR-SRV-1.sh
+
+-------------BR-SRV-docker---------------
+apt-get install wget
+wget https://raw.githubusercontent.com/get-lucky-now/test/main/docker.sh
+chmod +x docker.sh
+./BR-SRV-1.sh
+
+-------------HQ-SRV-moodle---------------
+apt-get install wget
+wget https://raw.githubusercontent.com/get-lucky-now/test/main/moodle.sh
+chmod +x moodle.sh
+./BR-SRV-1.sh
